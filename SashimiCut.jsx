@@ -1,12 +1,12 @@
 /*
-  GuillotineCut.jsx — Illustrator Script
+  SashimiCut.jsx — Illustrator Script
   Cut selected paths along any straight line (horizontal, vertical, 45°, or any angle).
   Supports multiple cutting lines — slice objects into grids in one action.
 
   Usage:
     1. Draw one or more straight lines (horizontal and/or vertical) as cutting guides
     2. Select the cutting line(s) + target paths
-    3. Run File > Scripts > GuillotineCut.jsx
+    3. Run File > Scripts > SashimiCut.jsx
     4. Objects are split at all cutting lines
 
   Requires: Adobe Illustrator CS6+
@@ -34,7 +34,7 @@
 
   if (!sel || sel.length < 2) {
     alert(
-      "GuillotineCut\n\nSelect a cutting line (horizontal or vertical) and one or more target paths, then run this script."
+      "SashimiCut\n\nSelect a cutting line (horizontal or vertical) and one or more target paths, then run this script."
     );
     return;
   }
@@ -60,7 +60,7 @@
 
   if (allPaths.length < 2) {
     alert(
-      "GuillotineCut\n\nSelect a cutting line (horizontal or vertical) and one or more target paths."
+      "SashimiCut\n\nSelect a cutting line (horizontal or vertical) and one or more target paths."
     );
     return;
   }
@@ -79,13 +79,13 @@
 
   if (cuttingLines.length === 0) {
     alert(
-      "GuillotineCut\n\nNo cutting line found.\nDraw a straight horizontal or vertical line and include it in your selection."
+      "SashimiCut\n\nNo cutting line found.\nDraw a straight horizontal or vertical line and include it in your selection."
     );
     return;
   }
   if (targets.length === 0) {
     alert(
-      "GuillotineCut\n\nNo target paths found.\nSelect at least one path to cut in addition to the cutting line(s)."
+      "SashimiCut\n\nNo target paths found.\nSelect at least one path to cut in addition to the cutting line(s)."
     );
     return;
   }

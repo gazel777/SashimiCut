@@ -1,4 +1,4 @@
-# GuillotineCut.jsx
+# SashimiCut.jsx
 
 Cut selected paths along any straight line in Adobe Illustrator — **without outlining strokes**. Horizontal, vertical, 45°, any angle. Multiple lines at once.
 
@@ -6,7 +6,7 @@ Cut selected paths along any straight line in Adobe Illustrator — **without ou
 
 1. Draw one or more **straight lines** where you want to cut (any angle)
 2. **Select** the cutting line(s) + the target path(s)
-3. Go to **File > Scripts > Other Script...** and choose `GuillotineCut.jsx`
+3. Go to **File > Scripts > Other Script...** and choose `SashimiCut.jsx`
 4. Done — your objects are split at the line(s)
 
 ![concept](https://via.placeholder.com/400x200?text=Before+→+After)
@@ -30,20 +30,20 @@ Cut selected paths along any straight line in Adobe Illustrator — **without ou
 
 To add as a permanent script in Illustrator:
 
-1. Copy `GuillotineCut.jsx` to:
+1. Copy `SashimiCut.jsx` to:
    - **Mac**: `/Applications/Adobe Illustrator 2025/Presets/en_US/Scripts/`
    - **Win**: `C:\Program Files\Adobe\Adobe Illustrator 2025\Presets\en_US\Scripts\`
 2. Restart Illustrator
-3. Access from **File > Scripts > GuillotineCut**
+3. Access from **File > Scripts > SashimiCut**
 
 ## Keyboard Shortcut (Recommended)
 
-Assign a shortcut so you can run GuillotineCut with one key:
+Assign a shortcut so you can run SashimiCut with one key:
 
 1. Open **Window > Actions**
 2. Click the **New Action** button (folder icon first if needed)
-3. Name it `GuillotineCut`, assign a **Function Key** (e.g. `F5`), click **Record**
-4. Go to **File > Scripts > Other Script...** and select `GuillotineCut.jsx`
+3. Name it `SashimiCut`, assign a **Function Key** (e.g. `F5`), click **Record**
+4. Go to **File > Scripts > Other Script...** and select `SashimiCut.jsx`
 5. Click **Stop Recording** in the Actions panel
 
 Now your workflow is:
