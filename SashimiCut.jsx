@@ -66,51 +66,54 @@
   }
 
   // Separate cutting lines from targets.
-  // Non-straight paths (curves, shapes) = always targets
-  // Straight 2-point lines: use stacking order to decide.
-  // Lines IN FRONT of any non-straight path = cutting lines.
-  // If ALL paths are straight lines, the topmost one = cutting line.
+  // Two modes:
+  // A) All on same layer → straight 2-point lines = cutting, rest = target
+  // B) Multiple layers → topmost layer's paths = cutting, lower layers = target
+  //    (for cutting strokes with strokes)
 
   var cuttingLines = [];
   var targets = [];
 
-  // First: are there any non-straight paths?
-  var hasNonStraight = false;
+  // Check if paths span multiple layers
+  var layers = {};
   for (var i = 0; i < allPaths.length; i++) {
-    if (!isCuttingLine(allPaths[i])) { hasNonStraight = true; break; }
+    var layerName = allPaths[i].layer.name;
+    if (!layers[layerName]) {
+      layers[layerName] = { layer: allPaths[i].layer, paths: [] };
+    }
+    layers[layerName].paths.push(allPaths[i]);
   }
 
-  if (hasNonStraight) {
-    // Normal case: straight lines = cutting, others = targets
+  var layerNames = [];
+  for (var name in layers) {
+    layerNames.push(name);
+  }
+
+  if (layerNames.length > 1) {
+    // Multiple layers: find the topmost layer among selected paths
+    // In Illustrator, doc.layers[0] = topmost layer
+    var topLayerIdx = Infinity;
+    var topLayerName = null;
+    for (var li = 0; li < doc.layers.length; li++) {
+      if (layers[doc.layers[li].name]) {
+        if (li < topLayerIdx) {
+          topLayerIdx = li;
+          topLayerName = doc.layers[li].name;
+        }
+      }
+    }
+    // Topmost layer = cutting lines, everything else = targets
     for (var i = 0; i < allPaths.length; i++) {
-      if (isCuttingLine(allPaths[i])) {
+      if (allPaths[i].layer.name === topLayerName) {
         cuttingLines.push(allPaths[i]);
       } else {
         targets.push(allPaths[i]);
       }
     }
   } else {
-    // ALL are straight 2-point lines → use layer item index to find frontmost
-    // In Illustrator, layer.pageItems[0] = topmost (frontmost)
-    // Lower index = more in front
-    var minIdx = Infinity;
-    var frontItem = null;
+    // Same layer: straight 2-point lines = cutting, others = targets
     for (var i = 0; i < allPaths.length; i++) {
-      // Find this item's index in its parent's pageItems
-      var parent = allPaths[i].layer;
-      for (var pi = 0; pi < parent.pageItems.length; pi++) {
-        if (parent.pageItems[pi] === allPaths[i]) {
-          if (pi < minIdx) {
-            minIdx = pi;
-            frontItem = allPaths[i];
-          }
-          break;
-        }
-      }
-    }
-    // The frontmost item = cutting line, rest = targets
-    for (var i = 0; i < allPaths.length; i++) {
-      if (allPaths[i] === frontItem) {
+      if (isCuttingLine(allPaths[i])) {
         cuttingLines.push(allPaths[i]);
       } else {
         targets.push(allPaths[i]);
