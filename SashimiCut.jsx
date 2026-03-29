@@ -651,34 +651,17 @@
       arcs.push(arcPts);
     }
 
-    // Step 3: Group alternating arcs into 2 sides
-    // Even arcs (0, 2, 4...) = side A, odd arcs (1, 3, 5...) = side B
-    // Connect arcs on the same side with straight edges along the cut line
+    // Step 3: Each arc becomes a separate closed path
+    // The closing edge (last→first) connects two split points on the cut line
+    // → always a straight line along the cut line
     var results = [];
     var layer = path.layer;
 
-    for (var side = 0; side < 2; side++) {
-      var combined = [];
-      for (var a = side; a < arcs.length; a += 2) {
-        var arc = arcs[a];
-        if (combined.length > 0) {
-          // Add straight edge from previous arc's end to this arc's start
-          // (both points are on the cut line, so the edge is along the cut)
-          var prevEnd = combined[combined.length - 1];
-          var nextStart = arc[0];
-          // Straighten the connection
-          prevEnd.rightDirection = [prevEnd.anchor[0], prevEnd.anchor[1]];
-          nextStart.leftDirection = [nextStart.anchor[0], nextStart.anchor[1]];
-        }
-        // Add all points of this arc
-        for (var ap = 0; ap < arc.length; ap++) {
-          combined.push(clonePoint(arc[ap]));
-        }
-      }
-      if (combined.length >= 2) {
-        // Straighten the closing edge (last→first, both on cut line)
-        straightenCutEdge(combined);
-        results.push(createPathFromPoints(layer, combined, true, path));
+    for (var a = 0; a < arcs.length; a++) {
+      var arcPts = arcs[a];
+      if (arcPts.length >= 2) {
+        straightenCutEdge(arcPts);
+        results.push(createPathFromPoints(layer, arcPts, true, path));
       }
     }
 
