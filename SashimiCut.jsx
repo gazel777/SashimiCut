@@ -670,8 +670,8 @@
           prevEnd.rightDirection = [prevEnd.anchor[0], prevEnd.anchor[1]];
           nextStart.leftDirection = [nextStart.anchor[0], nextStart.anchor[1]];
         }
-        // Add all points of this arc (skip first if already added via connection)
-        for (var ap = (combined.length > 0 ? 1 : 0); ap < arc.length; ap++) {
+        // Add all points of this arc
+        for (var ap = 0; ap < arc.length; ap++) {
           combined.push(clonePoint(arc[ap]));
         }
       }
