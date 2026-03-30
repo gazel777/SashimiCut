@@ -49,6 +49,15 @@ Now your workflow is:
 
 > Draw line(s) → Select all → **F5** → Done
 
+## Cutting Strokes with Strokes
+
+When both your targets and cutting lines are straight lines, put them on **separate layers**:
+
+- **Upper layer** = cutting lines
+- **Lower layer** = targets (strokes to be cut)
+
+For shapes and curves, no special setup needed — just works on the same layer.
+
 ## Limitations (MVP)
 
 - ~~Horizontal or vertical cuts only~~ Now supports any angle!
