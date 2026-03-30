@@ -9,7 +9,6 @@ Cut selected paths along any straight line in Adobe Illustrator — **without ou
 3. Go to **File > Scripts > Other Script...** and choose `SashimiCut.jsx`
 4. Done — your objects are split at the line(s)
 
-![concept](https://via.placeholder.com/400x200?text=Before+→+After)
 
 ## Features
 
